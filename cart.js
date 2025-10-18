@@ -1,11 +1,12 @@
 let cart = [
 { name: 'Pen', price: 2.5, quantity: 4 },
-{ name: 'Notebook', price: 5, quantity: 1 }
+{ name: 'Notebook', price: 5, quantity: 1 },
+{name: 'Pencil', price: 1.5, quantity: 2}
 ];
-cart.push({name: 'Pencil', price: 1.5, quantity: 2});
+
 //to add anew item (1> indicates the index where you want to add, 0>so you don't delete any items)
-cart.splice(1,0,{ name: 'backpack', price: 9, quantity: 1 })
-cart.splice(1,1)
+// cart.splice(1,0,{ name: 'backpack', price: 9, quantity: 1 })
+// cart.splice(1,1)
 const readlineSync = require('readline-sync');
   
 let choice = ''
@@ -111,6 +112,52 @@ function getMostExpensiveItem(cart){
 }
 
 function cartReset(cart){
-  let count = cart.length
-  cart.splice(0,count)
+  cart.length = 0;
 }
+
+//////////////////////////////////////////
+
+
+
+    function renderCart(cart) {
+      const tbody = document.querySelector('#cartTable tbody');
+      tbody.innerHTML = cart.map((item, i) => `
+        <tr>
+          <td>${i}</td>
+          <td>${item.name}</td>
+          <td>${item.price.toFixed(2)}</td>
+          <td>${item.quantity}</td>
+          <td>${(item.price*item.quantity).toFixed(2)}</td>
+        </tr>
+        `).join('')
+
+        document.getElementById('totalCell').textContent = 
+          '$' + cart.reduce((t,i)=>t+i.price*i.quantity,0).toFixed(2);
+    }
+    renderCart(cart);
+
+    document.getElementById('chkOutBtn').addEventListener('click',()=>{
+      if(cart.length === 0){
+        console.log("Your cart is empty! Add items before checkout.")
+      }
+      else{
+        console.log("Checkout clicked! Total is $" + 
+        cart.reduce((t, i) => t + i.price * i.quantity, 0).toFixed(2));
+      } 
+    })
+
+const shoppingCart = {
+
+items: [ { name: 'Pen', price: 2.5, quantity: 2 } ],
+addItem(name, price, qty) {
+   this.items.push({ name: name, price: price, quantity:qty }); },
+getTotal() { 
+  return this.items.reduce((t, i) => t + i.price * i.quantity,0); },
+removeItem(name){
+  let index = this.items.findIndex(i => i.name === name)
+  if (index !== -1){this.items.splice(index, 1)}
+},
+clearCart(){
+  this.items.length = 0;
+}
+};
