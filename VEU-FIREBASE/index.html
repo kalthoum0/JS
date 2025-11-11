@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VEU-FIREBASE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <style>
+      .box{
+        padding: 100px 0;
+        width: 400px;
+        text-align: center;
+        background: #ddd;
+        margin: 20px;
+        display: inline-block;
+    }
+    body{
+      background: #eee;
+      max-width:960px;
+      margin: 20px auto;      
+    } 
+    p,ul,h3{
+      padding:0;
+      margin: 0;
+    }
+    li{
+      list-style-type: none;
+      background: #fff;
+      margin: 20px auto;
+      padding: 10px 20px;
+      border-radius:10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    li.fav{
+      background:#ff9ed2;
+      color:white;
+    }
+    </style>
+  </head>
+<body>
+  <!-- vedio #2 -->
+  <h1>Hi</h1>
+  <div id="app">
+    <!-- v-if directive -->
+    <div v-if="showBooks">
+      <!-- we only need the {{}} when we are using the properties to output -->
+      <!-- <p>{{title}}-{{author}}-{{age}}</p> -->
+      <ul>
+        <li v-for="book in filterbooks" :class="{fav : book.isFav}" @click="toggleFav(book)">
+          <img :src="book.img" :alt="book.title">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
+    </div>
+    <!-- directive v-on | on is the name of event on click on mouse 
+     use : to specify the type of the event-->
+<!-- 
+    <button v-on:click="age++">Increase age</button>
+    <button v-on:click="age--">Decrease age</button><br> -->
+
+    <!-- v-on == @ | @click or v-on:click-->
+    <div @click="changeTitle()">change the book title</div><br>
+
+    <button @click="toggleBooks">
+      <span v-if="showBooks">Hide books</span>
+      <!-- <span v-if="!showBooks">Show books</span> -->
+      <span v-else>Show books</span>
+    </button>
+
+    <!-- the difference between v-if and v-show is that v-if will remove the element from the DOM
+    while v-show will just hide it using CSS display property -->
+    
+    <div v-show="showBooks">currently showing books</div> 
+    <br></br>
+
+    <!-------- vedio #3 ------->
+    <!-- to explicitly pass the event object $event -->
+    <!-- <div class="box" v-on:mouseover="handleEvent">mouseover</div>
+    <div class="box" @mouseleave="handleEvent">mouseleave</div>
+    <div class="box" @dblclick=handleEvent>double click</div>
+    <div class="box" @mousemove="handleMouseMove">position - {{x}} {{y}}</div>
+     -->
+    <!--directive v-for we use it to cycle through arrays
+    and output each item-->
+
+    <!--Attribute binding-->
+    <!-- directive v-bind: -->
+    <!-- we could just sue : > :href as a shortcut  -->
+     <a v-bind:href="url">website</a>
+
+  </div>  
+  <script src="app.js"></script>
+</body>
+</html>

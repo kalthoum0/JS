@@ -1,0 +1,28 @@
+{
+  "name": "new-folder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+       
+    "start": "node index.js",
+    "build": "tsc index.ts",
+    "run-ts": "ts-node index.ts"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalthoum0/JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalthoum0/JS/issues"
+  },
+  "homepage": "https://github.com/kalthoum0/JS#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "typescript": "^5.9.3"
+  }
+}
